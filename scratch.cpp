@@ -1,9 +1,14 @@
 #include <iostream>
-
+#include <cstdlib>
 #include <vector>
+#include <algorithm>
 
 #include "swap.hpp"
 #include "vector.hpp"
+
+bool compare_ints_desc(int& lhs, int& rhs) {
+  return lhs > rhs;
+}
 
 // template <class T>
 // void swap(T& a, T& b) {
@@ -71,19 +76,43 @@ int main(int argc, char** argv) {
   //   vec2d.push_back(row);
   // }
 
-  std::vector<std::vector<int> > vec2d(8);
-  for (int i = 0; i < 8; i++) {
-    std::vector<int> row(4);
-    for (int j = 0; j < 4; j++) {
-      row[j * 10] = i * j;
-    }
-    vec2d[i] = row;
-  }
+  // std::vector<std::vector<int> > vec2d(8);
+  // for (int i = 0; i < 8; i++) {
+  //   std::vector<int> row(4);
+  //   for (int j = 0; j < 4; j++) {
+  //     row[j * 10] = i * j;
+  //   }
+  //   vec2d[i] = row;
+  // }
+  //
+  // for (int i = 0; i < vec2d.size(); i++) {
+  //   for (int j = 0; j < vec2d[i].size(); j++) {
+  //     std::cout << "\t" << vec2d[i][j];
+  //   }
+  //   std::cout << std::endl;
+  // }
 
-  for (int i = 0; i < vec2d.size(); i++) {
-    for (int j = 0; j < vec2d[i].size(); j++) {
-      std::cout << "\t" << vec2d[i][j];
-    }
-    std::cout << std::endl;
+  std::vector<int> vec;
+  for (int i = 0; i < 16; i++) {
+    vec.push_back(rand() % 100);
   }
+  vec.push_back(44);
+  vec.push_back(44);
+
+  std::vector<int>::iterator iter;
+  for (iter = vec.begin(); iter != vec.end(); ++iter) {
+    std::cout << "  " << *iter;
+  }
+  std::cout << std::endl;
+
+  std::cout << "# of 44s: " << std::count(vec.begin(), vec.end(), 44) << std::endl;
+
+  std::sort(vec.begin(), vec.end(), compare_ints_desc);
+
+  for (iter = vec.begin(); iter != vec.end(); ++iter) {
+    std::cout << "  " << *iter;
+  }
+  std::cout << std::endl;
+
+
 }
